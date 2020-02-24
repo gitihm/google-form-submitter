@@ -1,191 +1,122 @@
-const request = require('request')
-const fs = require('fs')
+const request = require("request");
+const fs = require("fs");
 
-let i = 0
-let timer = null
+let i = 0;
+let timer = null;
 
-const rand = () => Math.floor(Math.random() * 10) + 1
+const rand = () => Math.floor(Math.random() * 10) + 1;
 const post = () =>
-	request.post(
-		'https://docs.google.com/forms/d/e/1FAIpQLSdLemF1YC8EypvUJ3zQClkh7kMNUSFSxi__9pbg7CEiGhMMtQ/formResponse',
-		{
-			headers: {
-				accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
-				'accept-language': 'th-TH,th;q=0.9,en;q=0.8',
-				'cache-control': 'max-age=0',
-				'sec-fetch-mode': 'navigate',
-				'sec-fetch-site': 'same-origin',
-				'sec-fetch-user': '?1',
-				'upgrade-insecure-requests': '1',
-				'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36',
-				'x-chrome-connected': 'id=115201375894437541919,mode=0,enable_account_consistency=false,consistency_enabled_by_default=false',
-				'x-client-data': 'CIu2yQEIprbJAQjBtskBCKmdygEI4qjKAQjKr8oBCM6wygEIq7LKAQ==',
-				referer: 'https://docs.google.com/forms/d/e/1FAIpQLSdLemF1YC8EypvUJ3zQClkh7kMNUSFSxi__9pbg7CEiGhMMtQ/formResponse'
-			},
-			form: encodeURI(`entry.2019337663=${
-				rand() > 8 ? 'มากที่สุด' : rand() > 7 ? 'มาก' : rand() > 6 ? 'น้อย' : 'ปานกลาง'
-			}&entry.1439896297=${rand() > 8 ? 'มากที่สุด' : rand() > 7 ? 'มาก' : rand() > 6 ? 'น้อย' : 'ปานกลาง'}&entry.1564720450=${
-				rand() > 7 ? 'ใช่' : 'ไม่ใช่'
-			}&entry.650614816=${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}&fvv=1&draftResponse=[[[null,405255629,["${rand() > 6 ? 'หญิง' : 'ชาย'}"]
-    ,0]
-    ,[null,1187933739,["${rand() > 7 ? '20-25 ปี' : rand() > 7 ? 'ต่ำกว่า 20 ปี' : rand() > 7 ? '26-30 ปี' : 'สูงกว่า 30 ปี ขึ้นไป'}"]
-    ,0]
-    ,[null,487499500,["${
-			rand() > 7 ? 'นักเรียน/นักศึกษา' : rand() > 7 ? 'ค้าขาย/ประกอบอาชีพส่วนตัว' : rand() > 7 ? 'ทำงานบริษัทเอกชน/โรงงาน' : 'รับจ้างทั่วไป'
-		}"]
-    ,0]
-    ,[null,2078785749,["${
-			rand() > 7 ? 'ต่ำกว่า 10,000 บาท' : rand() > 7 ? '10,000-20,000 บาท' : rand() > 7 ? '40,001-50,000 บาท' : '30,001-40,000 บาท'
-		}"]
-    ,0]
-    ,[null,1842887676,["${
-			rand() > 7 ? '1,000-2,000 บาท' : rand() > 7 ? '2,001-3,000 บาท' : rand() > 7 ? '3,001-4,000 บาท' : 'ต่ำกว่า 1,000 บาท'
-		}"]
-    ,0]
-    ,[null,923292515,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,1474662082,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,1591136707,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,977389374,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,988237827,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,2048258474,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,325752778,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,201527585,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,1447529455,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,1021395773,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,1174422512,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,697550401,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,337886614,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,2064776446,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,259177411,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,2078056363,["${
-			rand() > 7
-				? 'รูปร่างหน้าตา'
-				: rand() > 7
-				? 'ความสามารถ'
-				: rand() > 7
-				? 'น้ำเสียงที่ไพเราะ'
-				: rand() > 7
-				? 'การแต่งกาย'
-				: 'ลักษณะการเต้น'
-		}"]
-    ,0]
-    ,[null,1173023819,["${rand() > 7 ? 'ลิซ่า' : rand() > 7 ? 'โรเซ่' : rand() > 7 ? 'เจนนี่' : 'จีซู'}"]
-    ,0]
-    ,[null,1367662495,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,316758329,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,391164721,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,2041557928,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,149179360,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,662146564,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,979803944,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,1578384134,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,1622423340,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,539989915,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,1841086978,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,1083310049,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,1712554398,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,1340631368,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,1753779262,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,88770497,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,297443778,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,574806660,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,1364061558,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,1804855617,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,2072787561,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,162105444,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,543554485,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,882105217,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,577353947,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,1636825349,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,1818839074,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,905144120,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,1340456960,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,1800638053,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,844543469,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,34575532,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,1626318726,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,2096096330,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,1359224327,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,479854204,["${rand() > 8 ? 'มากที่สุด' : rand() > 7 ? 'มาก' : rand() > 6 ? 'น้อย' : 'ปานกลาง'}"]
-    ,0]
-    ,[null,310870205,["${rand() > 8 ? 'มากที่สุด' : rand() > 7 ? 'มาก' : rand() > 6 ? 'น้อย' : 'ปานกลาง'}"]
-    ,0]
-    ,[null,1184257102,["${rand() > 8 ? 'มากที่สุด' : rand() > 7 ? 'มาก' : rand() > 6 ? 'น้อย' : 'ปานกลาง'}"]
-    ,0]
-    ,[null,1484370715,["${rand() > 8 ? 'มากที่สุด' : rand() > 7 ? 'มาก' : rand() > 6 ? 'น้อย' : 'ปานกลาง'}"]
-    ,0]
-    ,[null,1712808107,["${rand() > 8 ? 'มากที่สุด' : rand() > 7 ? 'มาก' : rand() > 6 ? 'น้อย' : 'ปานกลาง'}"]
-    ,0]
-    ,[null,118247990,["${rand() > 8 ? 'มากที่สุด' : rand() > 7 ? 'มาก' : rand() > 6 ? 'น้อย' : 'ปานกลาง'}"]
-    ,0]
-    ,[null,1288806727,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,270793212,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,1686861147,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ,[null,578303473,["${rand() > 7 ? 'ใช่' : 'ไม่ใช่'}"]
-    ,0]
-    ]
-    ,null,"-197634129054708431"]
-    &pageHistory=0,1,2,3,4&fbzx=-197634129054708431`)
-		},
-		(e, r, b) => {
-			console.log(++i, b.indexOf('เราได้บันทึกคำตอบของคุณไว้แล้ว') !== -1)
-			fs.writeFileSync('debug.html', b)
-		}
-	)
+  request.post(
+    "https://docs.google.com/forms/u/0/d/e/1FAIpQLSe4RCHjykHRmTV--t31qLkSoqTuWIwge2D_Z2bsdlkkelZ4ng/formResponse",
+    {
+      headers: {
+        accept:
+          "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3",
+        "accept-language": "th-TH,th;q=0.9,en;q=0.8",
+        "cache-control": "max-age=0",
+        "sec-fetch-mode": "navigate",
+        "sec-fetch-site": "same-origin",
+        "sec-fetch-user": "?1",
+        "upgrade-insecure-requests": "1",
+        "user-agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36",
+        "x-chrome-connected":
+          "id=115201375894437541919,mode=0,enable_account_consistency=false,consistency_enabled_by_default=false",
+        "x-client-data":
+          "CIu2yQEIprbJAQjBtskBCKmdygEI4qjKAQjKr8oBCM6wygEIq7LKAQ==",
+        referer:
+          "https://docs.google.com/forms/u/0/d/e/1FAIpQLSe4RCHjykHRmTV--t31qLkSoqTuWIwge2D_Z2bsdlkkelZ4ng/formResponse"
+      },
+      form: encodeURI(`entry.1124049050=${
+        rand() > 5 ? "Female" : "Male"
+      }&entry.335377238=${
+        rand() > 8 ? "Less than 23" : rand() > 5 ? "31 to 50" : "more than 50"
+      }&entry.1167156427=${
+        rand() > 8
+          ? "With friends"
+          : rand() > 5
+          ? "With family (sons, relatives, etc)"
+          : "Boyfriend/Girlfriend"
+      }&entry.915067496=${
+        rand() > 8
+          ? "Monthly"
+          : rand() > 7
+          ? "Once a year"
+          : rand() > 5
+          ? "Twice a year"
+          : "More than 5 times a year"
+      }&fvv=1&draftResponse=[[[null,1038019991,["${
+        rand() > 8 ? "Community" : rand() > 5 ? "Adventure" : "Sight-seeing"
+      }"]
+    ,0]
+    ,[null,2012118827,["${
+      rand() > 7
+        ? "Center"
+        : rand() > 7
+        ? "North"
+        : rand() > 7
+        ? "South"
+        : "Northeast"
+    }"]
+    ,0]
+    ,[null,1118193831,["${
+      rand() > 5
+        ? "Following someone else’s plan (tour guide, online plan, etc)"
+        : "Planning before leaving home"
+    }"]
+    ,0]
+    ,[null,163025962,["${
+      rand() > 7
+        ? "Internet websites"
+        : rand() > 7
+        ? "Asking the locals of your destination"
+        : "Asking service providers, such as hotels clerks or tourist guides"
+    }"]
+    ,0]
+    ,[null,1993826339,["${
+      rand() > 7
+        ? "3,000฿-4,000฿ per person"
+        : rand() > 7
+        ? "5,000฿-7,000฿ per person"
+        : rand() > 7
+        ? "8,000฿-10,000฿ per person"
+        : "More than 10,000฿ per person"
+    }"]
+    ,0]
+    ,[null,1075586648,["${
+      rand() > 7
+        ? "half day trip"
+        : rand() > 7
+        ? "one day trip"
+        : rand() > 7
+        ? "2 days 1 night"
+        : rand() > 5
+        ? "3 days 2 nights"
+        : "1 week"
+    }"]
+    ,0]
+    ,[null,1626751957,["${
+      rand() > 7
+        ? "Hotel"
+        : rand() > 7
+        ? "Resort"
+        : rand() > 7
+        ? "Villa"
+        : "Homestay"
+    }"]
+    ,0]
+    ,[null,1886407717,["${rand() > 7 ? "Yes" : rand() > 5 ? "No" : "Maybe"}"]
+    ,0]
+  ]
+    ,null,"-2897307624769073063"]
+    &pageHistory=0,1,2,3,4&fbzx=-2897307624769073063`)
+    },
+    (e, r, b) => {
+      console.log(++i, b.indexOf("เราได้บันทึกคำตอบของคุณไว้แล้ว") !== -1);
+      fs.writeFileSync("debug.html", b);
+    }
+  );
 
-post()
-timer = setInterval(post, 300)
-setTimeout(() => clearInterval(timer), 60000)
+post();
+timer = setInterval(post, 300);
+setTimeout(() => clearInterval(timer), 60000);
